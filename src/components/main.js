@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import BugForm from "./BugForm";
+import BugList from "./BugList";
+import BugList2 from "./BugList2";
 
 const URL = "http://localhost:3333/bugs";
 
@@ -15,12 +17,12 @@ function Main() {
 	console.log("BUGS", bugs);
 	if (!bugs) return null;
 
-	const submitter = bugs.map(bug => {
+	const bugList = bugs.map(bug => {
 		if (bug !== null) {
 			return (
 				<div>
-					{/* <h3>{bug.info.submitter_name}</h3> */}
-					<p>{JSON.stringify(bug)}</p>
+					{/* <p>{JSON.stringify(bug)}</p> */}
+					<BugList2 bug={bug} />
 				</div>
 			);
 		} else {
@@ -31,8 +33,7 @@ function Main() {
 	return (
 		<div>
 			<h2>Bugs List</h2>
-			<BugForm></BugForm>
-			{submitter}
+			{bugList}
 		</div>
 	);
 }
