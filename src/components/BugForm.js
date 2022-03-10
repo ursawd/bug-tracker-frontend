@@ -6,9 +6,9 @@ import makeBug from "../utilities/makeBug";
 
 function fieldErr(msg) {
 	return (
-		<p style={{ color: "red", marginBottom: 0 }}>
+		<span style={{ color: "red", marginBottom: 0, paddingLeft: "150px" }}>
 			<small>{msg}</small>
-		</p>
+		</span>
 	);
 }
 
@@ -34,20 +34,22 @@ const BugForm = () => {
 			validationSchema={Yup.object({
 				summary: Yup.string()
 					.min(5, "Must be 5 char or greater")
-					.required("Required"),
-				submitter_name: Yup.string().max(25, "Must be 25 char or less"),
-				date_reported: Yup.string().required(fieldErr("Date is required")),
-				open: Yup.boolean().required(fieldErr("Open is required")),
-				platform: Yup.string().required("Required"),
-				o_s: Yup.string().required("Required"),
-				browser: Yup.string().required("Required"),
-				expected_result: Yup.string().required("Required"),
-				actual_result: Yup.string().required("Required"),
-				steps_to_reproduce: Yup.string().required("Required"),
-				severity: Yup.string().required("Required"),
-				assigned_to: Yup.string().required("Required"),
-				priority: Yup.string().required("Required"),
-				actions_taken: Yup.string().required("Required"),
+					.required(fieldErr("Required")),
+				submitter_name: Yup.string()
+					.max(25, "Must be 25 char or less")
+					.required(fieldErr("Required")),
+				date_reported: Yup.string().required(fieldErr("Required")),
+				open: Yup.boolean().required(fieldErr("Required")),
+				platform: Yup.string().required(fieldErr("Required")),
+				o_s: Yup.string().required(fieldErr("Required")),
+				browser: Yup.string().required(fieldErr("Required")),
+				expected_result: Yup.string().required(fieldErr("Required")),
+				actual_result: Yup.string().required(fieldErr("Required")),
+				steps_to_reproduce: Yup.string().required(fieldErr("Required")),
+				severity: Yup.string().required(fieldErr("Required")),
+				assigned_to: Yup.string().required(fieldErr("Required")),
+				priority: Yup.string().required(fieldErr("Required")),
+				actions_taken: Yup.string().required(fieldErr("Required")),
 			})}
 			onSubmit={(values, { setSubmitting }) => {
 				setTimeout(() => {
@@ -58,7 +60,13 @@ const BugForm = () => {
 			}}
 		>
 			<Form>
-				<div style={{ display: "flex", flexDirection: "column" }}>
+				<div
+					style={{
+						display: "flex",
+						flexDirection: "column",
+						marginLeft: "20px",
+					}}
+				>
 					<div style={{ display: "flex" }}>
 						<label className={"label"} htmlFor="summary">
 							Summary
@@ -88,35 +96,52 @@ const BugForm = () => {
 					</div>
 					<ErrorMessage name="date_reported" />
 
-					<div style={{ paddingTop: "5px" }}>
+					{/* <div style={{ paddingTop: "5px" }}>
 						<label className={"label"} htmlFor="open">
 							Open
 						</label>
 						<Field name="open" type="text" placeholder="true or false" />
 					</div>
+					<ErrorMessage name="open" /> */}
+
+					{/*---------------------- */}
+					<div style={{ paddingTop: "5px" }}>
+						<label className={"label"} htmlFor="open">
+							Open
+						</label>
+						<Field name="open" as="select">
+							<option value="">-Select one-</option>
+							<option value={true}>True</option>
+							<option value={false}>False</option>
+						</Field>
+					</div>
 					<ErrorMessage name="open" />
+					{/*---------------------- */}
 
 					<div style={{ paddingTop: "5px" }}>
 						<label className={"label"} htmlFor="platform">
 							Platform
 						</label>
-						<Field name="platform" type="text" />
+						<Field name="platform" as="select">
+							<option value="">-Select one-</option>
+							<option value="Windows">Windows</option>
+							<option value="Apple">Apple</option>
+							<option value="Linix">Linix</option>
+						</Field>
 					</div>
 					<ErrorMessage name="platform" />
-
-					<div style={{ paddingTop: "5px" }}>
-						<label className={"label"} htmlFor="o_s">
-							O/S
-						</label>
-						<Field name="o_s" type="text" />
-					</div>
-					<ErrorMessage name="o_s" />
 
 					<div style={{ paddingTop: "5px" }}>
 						<label className={"label"} htmlFor="browser">
 							Browser
 						</label>
-						<Field name="browser" type="text" />
+						<Field name="browser" as="select">
+							<option value="">-Select one-</option>
+							<option value="Chrome">Chrome</option>
+							<option value="Edge">Edge</option>
+							<option value="Safari">Safari</option>
+							<option value="Other">Other</option>
+						</Field>
 					</div>
 					<ErrorMessage name="browser" />
 
@@ -124,9 +149,36 @@ const BugForm = () => {
 						<label className={"label"} htmlFor="severity">
 							Severity
 						</label>
-						<Field name="severity" type="text" />
+						<Field name="severity" as="select">
+							<option value="">-Select one-</option>
+							<option value="Low">Low</option>
+							<option value="Minor">Minor</option>
+							<option value="Major">Major</option>
+							<option value="Critical">Critical</option>
+							<option value="Blocker">Blocker</option>
+						</Field>
 					</div>
 					<ErrorMessage name="severity" />
+
+					<div style={{ paddingTop: "5px" }}>
+						<label className={"label"} htmlFor="priority">
+							Priority
+						</label>
+						<Field name="priority" as="select">
+							<option value="">-Select one-</option>
+							<option value="Low">Low</option>
+							<option value="Medium">Medium</option>
+							<option value="High">High</option>
+						</Field>
+					</div>
+					<ErrorMessage name="priority" />
+					<div style={{ paddingTop: "5px" }}>
+						<label className={"label"} htmlFor="o_s">
+							O/S
+						</label>
+						<Field name="o_s" type="text" />
+					</div>
+					<ErrorMessage name="o_s" />
 					<div style={{ paddingTop: "5px" }}>
 						<label className={"label"} htmlFor="assigned_to">
 							Assigned To
@@ -134,13 +186,6 @@ const BugForm = () => {
 						<Field name="assigned_to" type="text" />
 					</div>
 					<ErrorMessage name="assigned_to" />
-					<div style={{ paddingTop: "5px" }}>
-						<label className={"label"} htmlFor="priority">
-							Priority
-						</label>
-						<Field name="priority" type="text" />
-					</div>
-					<ErrorMessage name="priority" />
 
 					<div style={{ display: "flex", paddingTop: "5px" }}>
 						<label className={"label"} htmlFor="expected_result">
