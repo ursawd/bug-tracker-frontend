@@ -1,9 +1,13 @@
+import { useState } from "react";
 import "./App.css";
 import Main from "./components/Main";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBug } from "@fortawesome/free-solid-svg-icons";
 import Nav from "./components/Nav";
+
 function App() {
+	const [bugs, setBugs] = useState(null);
+
 	return (
 		<div className="App">
 			<div>
@@ -12,7 +16,7 @@ function App() {
 				</h1>
 			</div>
 			<Nav />
-			<Main />
+			<Main bugs={bugs} setBugs={setBugs} />
 		</div>
 	);
 }

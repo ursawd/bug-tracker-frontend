@@ -6,8 +6,8 @@ import BugList2 from "./BugList2";
 
 const URL = "http://localhost:3333/bugs";
 
-function Main() {
-	const [bugs, setBugs] = useState(null);
+function Main({ bugs, setBugs }) {
+	// const [bugs, setBugs] = useState(null);
 
 	useEffect(() => {
 		axios.get(URL).then(response => {
@@ -21,7 +21,6 @@ function Main() {
 		if (bug !== null) {
 			return (
 				<div>
-					{/* <p>{JSON.stringify(bug)}</p> */}
 					<BugList2 bug={bug} />
 				</div>
 			);

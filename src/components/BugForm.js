@@ -2,6 +2,7 @@ import React from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import "./BugForm.css";
+import makeBug from "../utilities/makeBug";
 
 function fieldErr(msg) {
 	return (
@@ -51,6 +52,7 @@ const BugForm = () => {
 			onSubmit={(values, { setSubmitting }) => {
 				setTimeout(() => {
 					alert(JSON.stringify(values, null, 2));
+					makeBug(values);
 					setSubmitting(false);
 				}, 400);
 			}}
