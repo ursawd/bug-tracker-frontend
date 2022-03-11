@@ -12,27 +12,27 @@ function fieldErr(msg) {
 		</span>
 	);
 }
-
+const startingValues = {
+	summary: "",
+	submitter_name: "",
+	date_reported: "",
+	open: "",
+	platform: "",
+	o_s: "",
+	browser: "",
+	expected_result: "",
+	actual_result: "",
+	steps_to_reproduce: "",
+	severity: "",
+	assigned_to: "",
+	priority: "",
+	actions_taken: "",
+};
 const BugForm = () => {
 	const { bugs, setBugs, updated, setUpdated } = useContext(bugsContext);
 	return (
 		<Formik
-			initialValues={{
-				summary: "",
-				submitter_name: "",
-				date_reported: "",
-				open: "",
-				platform: "",
-				o_s: "",
-				browser: "",
-				expected_result: "",
-				actual_result: "",
-				steps_to_reproduce: "",
-				severity: "",
-				assigned_to: "",
-				priority: "",
-				actions_taken: "",
-			}}
+			initialValues={startingValues}
 			validationSchema={Yup.object({
 				summary: Yup.string()
 					.min(5, "Must be 5 char or greater")
@@ -53,12 +53,13 @@ const BugForm = () => {
 				priority: Yup.string().required(fieldErr("Required")),
 				actions_taken: Yup.string().required(fieldErr("Required")),
 			})}
-			onSubmit={(values, { setSubmitting }) => {
+			onSubmit={(values, { setSubmitting, resetForm }) => {
 				setTimeout(() => {
 					alert(JSON.stringify(values, null, 2));
 					makeBug(values);
 					setUpdated(!updated);
 					setSubmitting(false);
+					resetForm({ values: startingValues });
 				}, 400);
 			}}
 		>

@@ -2,8 +2,8 @@ import React, { useContext } from "react";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencil, faTrash } from "@fortawesome/free-solid-svg-icons";
-import bugContext from "../utilities/bugsContext";
 import bugsContext from "../utilities/bugsContext";
+import "./BugForm.css";
 
 const BugList2 = ({ bug }) => {
 	// if (bug.where === undefined) {
@@ -28,7 +28,7 @@ const BugList2 = ({ bug }) => {
 			});
 	}
 	return (
-		<div style={{ display: "flex" }}>
+		<div style={{ display: "flex", marginTop: "20px" }}>
 			{/* Icons for edit and delete */}
 			<FontAwesomeIcon
 				style={{ marginRight: "10px" }}
@@ -44,26 +44,60 @@ const BugList2 = ({ bug }) => {
 				onClick={bugDelete}
 			/>
 			<div style={{ flexDirection: "column" }}>
-				<p>Summary: {bug.summary}</p>
+				<header>{bug.summary}</header>
+				<div style={{ display: "flex" }}>
+					<p>
+						<span>{bug.info.open ? "Open" : "Closed"}</span>
+					</p>
+					<p style={{ marginLeft: "15px" }}>
+						<span>{bug.info.date_reported}</span>
+					</p>
+					<p style={{ marginLeft: "15px" }}>
+						Submitter: <span>{bug.info.submitter_name}</span>
+					</p>
+				</div>
 
-				<p>Submitter: {bug.info.submitter_name}</p>
+				<div style={{ display: "flex" }}>
+					<p>
+						Platform: <span>{bug.where.platform}</span>
+					</p>
+					<p style={{ marginLeft: "15px" }}>
+						O/S: <span>{bug.where.o_s}</span>
+					</p>
+					<p style={{ marginLeft: "15px" }}>
+						Browser: <span>{bug.where.browser}</span>
+					</p>
+				</div>
 
-				<p>Reported: {bug.info.date_reported}</p>
+				<div style={{ display: "flex" }}>
+					<p>
+						Severity: <span>{bug.action.severity}</span>
+					</p>
+					<p style={{ marginLeft: "15px" }}>
+						Priority: <span>{bug.action.priority}</span>
+					</p>
+				</div>
 
-				<p>Open?: {bug.info.open ? "Open" : "Closed"}</p>
+				<p>
+					Asigned To: <span>{bug.action.assigned_to}</span>
+				</p>
 
-				<p>Platform: {bug.where.platform}</p>
+				<p>
+					Expected Result: <span>{bug.problem.expected_result}</span>
+				</p>
+
+				<p>
+					Actual Results: <span>{bug.problem.actual_result}</span>
+				</p>
+
+				<p>
+					Steps to Reproduce: <span>{bug.problem.steps_to_reproduce}</span>
+				</p>
+
+				<p>
+					Actions Taken: <span>{bug.action.actions_taken}</span>
+				</p>
 			</div>
-			{/* 
-			<p>O/S: {bug.where.o_s}</p>
-			<p>Browser: {bug.where.browser}</p>
-			<p>Severity: {bug.action.severity}</p>
-			<p>Asigned To: {bug.action.assigned_to}</p>
-			<p>Priority {bug.action.priority}</p>
-			<p>Expected Result {bug.problem.expected_result}</p>
-			<p>Actual Results {bug.problem.actual_result}</p>
-			<p>Steps to Reproduce {bug.problem.steps_to_reproduce}</p>
-			<p>Actions Taken{bug.actions.actions_taken}</p> */}
 		</div>
 	);
 };
