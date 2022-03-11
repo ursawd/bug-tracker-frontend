@@ -40,7 +40,7 @@ const BugForm = () => {
 				submitter_name: Yup.string()
 					.max(25, "Must be 25 char or less")
 					.required(fieldErr("Required")),
-				date_reported: Yup.string().required(fieldErr("Required")),
+				date_reported: Yup.date().max(Date()).required(fieldErr("Required")),
 				open: Yup.boolean().required(fieldErr("Required")),
 				platform: Yup.string().required(fieldErr("Required")),
 				o_s: Yup.string().required(fieldErr("Required")),

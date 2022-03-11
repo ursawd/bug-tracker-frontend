@@ -1,12 +1,31 @@
-import React from "react";
+import React, { useContext } from "react";
+import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencil, faTrash } from "@fortawesome/free-solid-svg-icons";
+import bugContext from "../utilities/bugsContext";
+import bugsContext from "../utilities/bugsContext";
 
 const BugList2 = ({ bug }) => {
-	console.log("WHERE", JSON.stringify(bug.where));
-	if (bug.where === undefined) {
-		bug.where = {};
-		bug.where.platform = "";
+	// if (bug.where === undefined) {
+	// 	bug.where = {};
+	// 	bug.where.platform = "";
+	// }
+
+	const { bugs, setBugs, updated, setUpdated } = useContext(bugsContext);
+
+	function bugDelete() {
+		console.log("DELETING", bug._id);
+		const URL = "http://localhost:3333/bugs/" + bug._id;
+		console.log(URL);
+		axios
+			.delete(URL)
+			.then(function (response) {
+				console.log(response);
+				setUpdated(!updated);
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
 	}
 	return (
 		<div style={{ display: "flex" }}>
@@ -22,6 +41,7 @@ const BugList2 = ({ bug }) => {
 				icon={faTrash}
 				size={"1x"}
 				color={"red"}
+				onClick={bugDelete}
 			/>
 			<div style={{ flexDirection: "column" }}>
 				<p>Summary: {bug.summary}</p>
