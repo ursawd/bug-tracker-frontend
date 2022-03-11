@@ -1,4 +1,3 @@
-import React from "react";
 import axios from "axios";
 
 const URL = "http://localhost:3333/bugs";

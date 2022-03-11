@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import "./BugForm.css";
 import makeBug from "../utilities/makeBug";
+import bugsContext from "../utilities/bugsContext";
 
 function fieldErr(msg) {
 	return (
@@ -13,6 +14,7 @@ function fieldErr(msg) {
 }
 
 const BugForm = () => {
+	const { bugs, setBugs, updated, setUpdated } = useContext(bugsContext);
 	return (
 		<Formik
 			initialValues={{
@@ -55,6 +57,7 @@ const BugForm = () => {
 				setTimeout(() => {
 					alert(JSON.stringify(values, null, 2));
 					makeBug(values);
+					setUpdated(!updated);
 					setSubmitting(false);
 				}, 400);
 			}}
