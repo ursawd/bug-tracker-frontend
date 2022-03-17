@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { Button } from "reactstrap";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import "./BugForm.css";
@@ -29,7 +30,7 @@ const startingValues = {
 	actions_taken: "",
 };
 const BugForm = () => {
-	const { bugs, setBugs, updated, setUpdated } = useContext(bugsContext);
+	const { updated, setUpdated } = useContext(bugsContext);
 	return (
 		<Formik
 			initialValues={startingValues}
@@ -68,7 +69,7 @@ const BugForm = () => {
 					style={{
 						display: "flex",
 						flexDirection: "column",
-						marginLeft: "20px",
+						marginLeft: "60px",
 					}}
 				>
 					<div style={{ display: "flex" }}>
@@ -247,8 +248,15 @@ const BugForm = () => {
 					<ErrorMessage name="actions_taken" />
 
 					{/* -------------------------------------------------------------------*/}
-					<div>
-						<button type="submit">Submit</button>
+					<div style={{ marginLeft: "auto" }}>
+						<Button
+							color="danger"
+							type="submit"
+							outline
+							style={{ marginTop: "20px", width: "100px", marginRight: "16px" }}
+						>
+							Save Bug
+						</Button>
 					</div>
 				</div>
 			</Form>

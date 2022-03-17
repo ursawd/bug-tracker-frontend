@@ -3,7 +3,6 @@ import axios from "axios";
 const URL = "http://localhost:3333/bugs";
 
 export default function makeBug(values) {
-	console.log(values);
 	let newBug = {
 		summary: values.summary,
 		info: {
@@ -28,7 +27,6 @@ export default function makeBug(values) {
 			actions_taken: values.actions_taken,
 		},
 	};
-	console.log("NEWBUG", newBug);
 	axios
 		.post(URL, newBug)
 		.then(function (response) {

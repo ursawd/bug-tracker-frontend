@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Modal, ModalHeader, ModalFooter } from "reactstrap";
 import BugForm from "../components/BugForm";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBug, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faBug, faPlus, faPencil } from "@fortawesome/free-solid-svg-icons";
 
 class ModalAddBug extends React.Component {
 	constructor(props) {
@@ -23,13 +23,25 @@ class ModalAddBug extends React.Component {
 	render() {
 		return (
 			<div>
-				<Button
-					color="dark"
-					onClick={this.toggle}
-					style={{ marginRight: "20px", width: "125px" }}
-				>
-					Add Bug
-				</Button>
+				{!this.props.title && (
+					<FontAwesomeIcon
+						style={{ marginRight: "10px" }}
+						icon={faPencil}
+						size={"1x"}
+						color={"red"}
+						onClick={this.toggle}
+					/>
+				)}
+				{this.props.title && (
+					<Button
+						color="dark"
+						onClick={this.toggle}
+						style={{ marginRight: "20px", width: "125px" }}
+					>
+						{/* Add Bug */}
+						{this.props.title}
+					</Button>
+				)}
 				<Modal
 					isOpen={this.state.modal}
 					toggle={this.toggle}
@@ -42,10 +54,15 @@ class ModalAddBug extends React.Component {
 					</ModalHeader>
 					<BugForm />
 					<ModalFooter>
-						<Button color="danger" outline onClick={this.toggle}>
+						{/* <Button color="danger" outline onClick={this.toggle}>
 							Save Bug
-						</Button>{" "}
-						<Button color="secondary" outline onClick={this.toggle}>
+						</Button>{" "} */}
+						<Button
+							color="secondary"
+							style={{ width: "100px" }}
+							outline
+							onClick={this.toggle}
+						>
 							Cancel
 						</Button>
 					</ModalFooter>
@@ -54,5 +71,4 @@ class ModalAddBug extends React.Component {
 		);
 	}
 }
-
 export default ModalAddBug;

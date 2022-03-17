@@ -4,6 +4,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencil, faTrash } from "@fortawesome/free-solid-svg-icons";
 import bugsContext from "../utilities/bugsContext";
 import "./BugForm.css";
+import BugForm from "./BugForm";
+import ModalAddBug from "../utilities/ModalAddBug";
+import { Button } from "../utilities/ModalAddBug";
 
 const BugList2 = ({ bug }) => {
 	// if (bug.where === undefined) {
@@ -27,15 +30,19 @@ const BugList2 = ({ bug }) => {
 				console.log(error);
 			});
 	}
+	function bugEdit() {
+		console.log("XXXbug editXXX");
+	}
 	return (
 		<div style={{ display: "flex", marginTop: "20px" }}>
 			{/* Icons for edit and delete */}
-			<FontAwesomeIcon
+			{/* <FontAwesomeIcon
 				style={{ marginRight: "10px" }}
 				icon={faPencil}
 				size={"1x"}
 				color={"red"}
-			/>
+			/> */}
+			<ModalAddBug />
 			<FontAwesomeIcon
 				style={{ marginRight: "10px" }}
 				icon={faTrash}
